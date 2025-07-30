@@ -5,7 +5,7 @@ import numpy as np
 df = pd.read_csv("full_311_2024.csv")
 
 #filter by desired 311 report reasons
-df = df[df["reason"].isin(['Graffiti', 'Alert Boston', 'Generic Noise Disturbance', 'Noise Disturbance', 'Current Events', 'Parking Complaints'])]
+df = df[df["reason"].isin(['Sanitation', 'Code Enforcement', 'Graffiti', 'Alert Boston', 'Generic Noise Disturbance', 'Noise Disturbance', 'Current Events', 'Parking Complaints'])]
 
 print(df.size)
 
@@ -32,10 +32,12 @@ bc_df = df[df['bc_distance'] <=1]
 
 just_outside = df[df['bc_distance'] <=np.sqrt(2)]
 
+print(len(just_outside))
+
 just_outside = just_outside.drop(just_outside[just_outside['bc_distance'] <=1].index)
 
-#bc_df.to_csv('bc_df_1mile.csv')
+bc_df.to_csv('bc_df_1mile.csv')
 just_outside.to_csv('comparison.csv')
 
-print(bc_df.size)
-print(just_outside.size)
+print(len(bc_df))
+print(len(just_outside))
